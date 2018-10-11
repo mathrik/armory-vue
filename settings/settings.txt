@@ -1,0 +1,9 @@
+Settings
+
+
+
+
+// https://render-us.worldofwarcraft.com/
+// https://us.api.battle.net/wow/character/wyrmrest-accord/Daokou?locale=en_US&apikey=xd6kggq2jgkb29d2db7t548j2dtp8r7d
+// https://us.api.battle.net/wow/character/wyrmrest-accord/Gromdrek?fields=pets&locale=en_US&apikey=xd6kggq2jgkb29d2db7t548j2dtp8r7d
+// https://us.api.battle.net/wow/character/wyrmrest-accord/Gromdrek?fields=reputation&locale=en_US&apikey=xd6kggq2jgkb29d2db7t548j2dtp8r7d
