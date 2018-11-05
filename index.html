@@ -1,13 +1,29 @@
 <html>
 <head>
-	<title>Battle.net API</title>
+	<title>Mathrik's Dumb Armory</title>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <div class="app-container">
-	{{ message }}
+	<div v-if="showCharSelector">
+		(Realm should be all lower case with dashes for spaces.)<br />
+		Realm: <input v-model="realm">
+		<br />
+		Character: <input v-model="character">
+		<br />
+		<button v-on:click="fetchCharacter">Show My Character</button>
+		<hr />
+	</div>
+	<h4>{{ characterName }}</h4>
+	<img v-bind:src="avatar" alt="avatar" />
+	<br />
+	Race: {{ characterRace }}
+	<br />
+	Class: {{ characterClass }}
+	<br />
+	<button v-on:click="pickNewCharacter">Switch Characters</button>
 </div>
 
 <script src="js/armory-vue.js"></script>
