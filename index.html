@@ -16,13 +16,44 @@
 		<button v-on:click="fetchCharacter">Show My Character</button>
 		<hr />
 	</div>
-	<h4>{{ characterName }}</h4>
+<!-- end of character selection -->
+	<nav class="options-menu">
+		<a href="#" v-on:click="showProfile">Profile</a> |
+		<a href="#" v-on:click="showAchievements">Achievements</a> |
+		<a href="#" v-on:click="showMounts">Mounts</a> |
+		<a href="#" v-on:click="showBattlePets">Battle Pets</a> |
+		<a href="#" v-on:click="showReputation">Reputation</a>
+	</nav>
+
+
+	<h1>{{ characterName }}</h1>
 	<img v-bind:src="avatar" alt="avatar" />
 	<br />
 	Race: {{ characterRace }}
 	<br />
 	Class: {{ characterClass }}
 	<br />
+
+	<div v-if="achievesVisible"> 
+		<h4>Achievements</h4>
+	</div>
+
+	<div v-if="battlePetsVisible"> 
+		<h4>Battle Pets</h4>
+	</div>
+
+	<div v-if="mountsVisible"> 
+		<h4>Mounts</h4>
+	</div>
+
+	<div v-if="profileVisible"> 
+		<h4>Profile</h4>
+	</div>
+
+	<div v-if="reputationVisible"> 
+		<h4>Reputation</h4>
+	</div>
+
 	<button v-on:click="pickNewCharacter">Switch Characters</button>
 </div>
 
