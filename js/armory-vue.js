@@ -3,8 +3,10 @@ var landingpage = new Vue({
   data: {
   	achievesVisible: false,
   	apiData: {},
+  	apiKey: 'xd6kggq2jgkb29d2db7t548j2dtp8r7d',
     avatar: 'https://render-us.worldofwarcraft.com/character/wyrmrest-accord/157/137192861-avatar.jpg',
     apiDataLocation: 'https://us.api.battle.net/wow',
+    battlePetArray: [],
     battlePetsVisible: false,
     character: 'Daokou',
     characterName: 'Daokou',
@@ -13,6 +15,8 @@ var landingpage = new Vue({
     charclasses: {},
     charraces: {},
     mountsVisible: false,
+    numBattlePetsCollected: 0,
+    numBattlePetsNotCollected: 0,
     profileVisible: false,
     realm: 'wyrmrest-accord',
     reputationVisible: false,
@@ -25,11 +29,11 @@ var landingpage = new Vue({
 
   },
   created: function() {
-  	axios.get(this.apiDataLocation + '/data/character/races?locale=en_US&apikey=xd6kggq2jgkb29d2db7t548j2dtp8r7d')
+  	axios.get(this.apiDataLocation + '/data/character/races?locale=en_US&apikey=' + this.apiKey)
   		.then(response => {
   			this.charraces = response.data.races;
   		})
-	axios.get(this.apiDataLocation + '/data/character/classes?locale=en_US&apikey=xd6kggq2jgkb29d2db7t548j2dtp8r7d')
+	axios.get(this.apiDataLocation + '/data/character/classes?locale=en_US&apikey=' + this.apiKey)
   		.then(response => {
   			this.charclasses = response.data.classes;
   		})
@@ -37,7 +41,7 @@ var landingpage = new Vue({
   methods: {
 	fetchCharacter: function() {
 		var url = this.apiDataLocation + '/character/' +
-			this.realm + '/' + this.character + '?locale=en_US&apikey=xd6kggq2jgkb29d2db7t548j2dtp8r7d';
+			this.realm + '/' + this.character + '?locale=en_US&apikey=' + this.apiKey;
 		axios.get(url).then(response => {
 			this.apiData = response.data;
 			this.avatar = 'https://render-us.worldofwarcraft.com/character/' + this.apiData.thumbnail;
@@ -76,11 +80,19 @@ var landingpage = new Vue({
 		this.reputationVisible = false;
 	},
 	showBattlePets: function() {
-		this.achievesVisible = false;
-		this.battlePetsVisible = true;
-		this.mountsVisible = false;
-		this.profileVisible = false;
-		this.reputationVisible = false;
+		var url = this.apiDataLocation + '/character/' +
+			this.realm + '/' + this.character + '?locale=en_US&fields=pets&apikey=' + this.apiKey;
+		axios.get(url).then(response => {
+			this.battlePetArray = response.data.pets.collected;
+			this.numBattlePetsCollected = response.data.pets.numCollected;
+			this.numBattlePetsNotCollected = response.data.pets.numNotCollected;
+
+			this.achievesVisible = false;
+			this.battlePetsVisible = true;
+			this.mountsVisible = false;
+			this.profileVisible = false;
+			this.reputationVisible = false;
+		});
 	},
 	showMounts: function() {
 		this.achievesVisible = false;
